@@ -22,10 +22,14 @@ import CodeScanningReports from "./CodeScanningReports.vue";
     flex: 1;
     background-color: #fff;
 
+    padding: 0 1em;
+
 
     &-side {
         width: 300px;
         border-right: solid 1px rgba(0, 0, 0, 0.06);
+        display: flex;
+        flex-direction: column;
     }
 
     &-content {

@@ -2,9 +2,13 @@
 import { SpaceCorrector, SpacesProvider } from 'spaces-vue3'
 import { getMine } from "../services/spaces.js";
 import SpaceLayout from "../components/space/SpaceLayout.vue";
+import { computed, provide } from "vue";
 
 const props = defineProps({ solution: String, module: String, report: String })
 
+provide('solution', computed(()=>props.solution))
+provide('module', computed(()=>props.module))
+provide('report', computed(()=>props.report))
 </script>
 
 <template>
