@@ -18,6 +18,7 @@ const innerValue = computed({
 
 <style scoped lang="less">
 .reports-header {
-    padding: 8px 8px 8px 0;
+    padding: 1em;
+    margin-left: -1em;
 }
 </style>

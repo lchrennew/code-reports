@@ -4,11 +4,11 @@ import CodeScanningReportsListItem from "./CodeScanningReportsListItem.vue";
 import { computed } from "vue";
 
 const props = defineProps({
-    data: Array,
+    reports: Array,
     keyword: String,
 })
 
-const visibleReports = computed(() => props.data.filter(report => report.name.includes(props.keyword)))
+const visibleReports = computed(() => props.reports.filter(report => report.name.includes(props.keyword)))
 </script>
 
 <template>
