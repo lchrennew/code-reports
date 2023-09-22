@@ -1,13 +1,19 @@
 <script setup>
+import { RawSpaceLoader, SpaceCorrector, SpacesProvider } from 'spaces-vue3'
+import { getMine } from "../spaces.js";
+
 const props = defineProps({ solution: String, module: String, job: String })
 
 </script>
 
 <template>
-    <router-link :to="{name: '代码报告:我的空间/报告详情', params: {job: 1}}">报告1</router-link>
-    <router-link :to="{name: '代码报告:我的空间/报告详情', params: {job: 2}}">报告2</router-link>
-    <router-link :to="{name: '代码报告:我的空间/报告详情', params: {job: 3}}">报告3</router-link>
-    <router-view/>
+    <spaces-provider #="{defaultSpace, changeable, specifiedSpace}" consumer="admin" :get-mine="getMine">
+        <space-corrector default-route="代码报告:我的空间" v-bind="{defaultSpace, module, solution, specifiedSpace}">
+            <raw-space-loader #="{rawSolution, rawModule}" v-bind="{path, getRawSpace}">
+                <router-view/>
+            </raw-space-loader>
+        </space-corrector>
+    </spaces-provider>
 </template>
 
 <style scoped>
