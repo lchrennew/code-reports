@@ -8,4 +8,4 @@ import 'ant-design-vue/dist/reset.css'
 createApp(App)
     .use(router)
     .use(Antd)
-    .mount('#app')
+    .mount('#code-report')

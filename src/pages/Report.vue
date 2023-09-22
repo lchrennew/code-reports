@@ -4,7 +4,7 @@ import CodeScanningReportFilter from "../components/report/CodeScanningReportFil
 import CodeScanningReportTools from "../components/report/CodeScanningReportTools.vue";
 import CodeScanningReportIssues from "../components/report/CodeScanningReportIssues.vue";
 
-const props = defineProps({ solution: String, module: String, job: String })
+const props = defineProps({ solution: String, module: String, report: String })
 
 </script>
 
