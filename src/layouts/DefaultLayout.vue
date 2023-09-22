@@ -9,9 +9,7 @@ import DefaultHeader from "./DefaultHeader.vue";
             <default-header/>
         </a-layout-header>
         <a-layout-content>
-            <div class="layout-content">
-                <router-view/>
-            </div>
+            <router-view/>
         </a-layout-content>
     </a-layout>
 </template>
@@ -35,15 +33,6 @@ import DefaultHeader from "./DefaultHeader.vue";
     & > main {
         display: flex;
         flex-direction: column;
-
-        .layout-content {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            background-color: #fff;
-            padding: 0;
-            position: relative;
-        }
 
         .layout-footer {
             background-color: #000000aa;
