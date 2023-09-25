@@ -42,6 +42,8 @@ const route = useRoute()
 const router = useRouter()
 const onFinish = () =>
     router.push({ query: { ...route.query, ...modelRef.value } })
+
+// TODO: 加载扫描规则、提交人数据
 </script>
 
 <template>
