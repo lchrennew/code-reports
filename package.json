@@ -13,6 +13,7 @@
     "ant-design-vue": "^4.0.3",
     "context-vue3": "^0.0.3",
     "data-loader-vue3": "^0.0.8",
+    "highlight.js": "^11.8.0",
     "scroll-bars-vue3": "^0.0.11",
     "spaces-vue3": "^0.0.8",
     "vue": "^3.3.4",

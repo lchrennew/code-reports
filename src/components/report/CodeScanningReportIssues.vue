@@ -2,6 +2,7 @@
 import DataLoader from "data-loader-vue3/src/DataLoader.vue";
 import { computed, inject } from "vue";
 import { getIssues } from "../../services/issues.js";
+import CodeScanningIssueCodeLines from "./issue/CodeScanningIssueCodeLines.vue";
 
 
 const solution = inject('solution')
@@ -67,6 +68,9 @@ const args = computed(() => ({
                         <a href="#">忽略</a>
                     </a-space>
                 </a-table-column>
+                <template #expandedRowRender="{record}">
+                    <code-scanning-issue-code-lines :lines="record.codes"/>
+                </template>
             </a-table>
         </data-loader>
     </div>
@@ -75,5 +79,6 @@ const args = computed(() => ({
 <style scoped lang="less">
 .report-issues {
     flex: 1;
+
 }
 </style>
