@@ -2,7 +2,7 @@
 import { computed, onMounted, ref } from "vue";
 import CodeSannningIssueCodeLine from "./CodeSannningIssueCodeLine.vue";
 
-const props = defineProps({ lines: String })
+const props = defineProps({ lines: String, issue: Object })
 const el = ref()
 
 const code = computed(() => {
@@ -26,7 +26,7 @@ onMounted(() => el.value.querySelectorAll('span:not(.linenumber)').forEach(line 
 
 <template>
     <div ref="el" class="code">
-        <div class="line" v-for="line in code">
+        <div class="line" v-for="line in code" :class="{active: line.num === issue.line}">
             <div class="line-num">{{ line.num }}</div>
             <code-sannning-issue-code-line :code="line.code"/>
         </div>
@@ -47,6 +47,18 @@ onMounted(() => el.value.querySelectorAll('span:not(.linenumber)').forEach(line 
         display: flex;
         flex-direction: row;
         align-items: center;
+        position: relative;
+
+        &.active:before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: rgba(255, 0, 0, 0.1);
+        }
 
         &:hover {
             background-color: rgba(0, 0, 0, 0.04);

@@ -80,7 +80,7 @@ const toggleExpanded = key =>
                     </a-space>
                 </a-table-column>
                 <template #expandedRowRender="{record}">
-                    <code-scanning-issue-code-lines :lines="record.codes"/>
+                    <code-scanning-issue-code-lines :lines="record.codes" :issue="record"/>
                 </template>
             </a-table>
         </data-loader>
