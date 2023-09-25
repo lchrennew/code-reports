@@ -16,6 +16,8 @@ const props = defineProps({
     issueTimeFrom: String,
     issueTimeTo: String,
     filename: String,
+    page: String,
+    size: String,
 })
 
 const reports = inject('reports')
@@ -29,7 +31,8 @@ provide('committer', computed(() => props.committer))
 provide('issueTimeFrom', computed(() => props.issueTimeFrom ? dayjs(props.issueTimeFrom) : null))
 provide('issueTimeTo', computed(() => props.issueTimeTo ? dayjs(props.issueTimeTo) : null))
 provide('filename', computed(() => props.filename))
-
+provide('page', computed(() => Number(props.page) || 1))
+provide('size', computed(() => Number(props.size) || 20))
 </script>
 
 <template>
