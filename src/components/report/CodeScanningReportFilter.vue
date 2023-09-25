@@ -1,9 +1,37 @@
 <script setup>
 
-import { ref } from "vue";
+import { computed, inject, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-const modelRef = ref({})
 
+const level = inject('level')
+const rules = inject('rules')
+const committer = inject('committer')
+const issueTimeFrom = inject('issueTimeFrom')
+const issueTimeTo = inject('issueTimeTo')
+const filename = inject('filename')
+
+const modelRef = ref({
+    level: level.value,
+    rules: rules.value,
+    committer: committer.value,
+    issueTimeFrom: issueTimeFrom.value,
+    issueTimeTo: issueTimeTo.value,
+    filename: filename.value,
+})
+
+const issueTime = computed({
+    get: () => [ modelRef.value.issueTimeFrom, modelRef.value.issueTimeTo ],
+    set: ([ from, to ]) => {
+        modelRef.value.issueTimeFrom = from;
+        modelRef.value.issueTimeTo = to;
+    }
+})
+
+const route = useRoute()
+const router = useRouter()
+const onFinish = () =>
+    router.push({ query: { ...route.query, ...modelRef.value } })
 </script>
 
 <template>
@@ -12,7 +40,7 @@ const modelRef = ref({})
             ref="formRef"
             :model="modelRef"
             name="search-form"
-
+            @finish="onFinish"
         >
             <a-row :gutter="24">
                 <a-col :span="6">
@@ -44,9 +72,8 @@ const modelRef = ref({})
                         name="commiter"
                         label="提交人"
                     >
-                        <a-select v-model:value="modelRef.commiter">
+                        <a-select v-model:value="modelRef.committer">
                             <a-select-option value="">全部</a-select-option>
-
                         </a-select>
                     </a-form-item>
                 </a-col>
@@ -55,7 +82,7 @@ const modelRef = ref({})
                         name="issueTime"
                         label="发现时间"
                     >
-                        <a-range-picker v-model:value="modelRef.issueTime"/>
+                        <a-range-picker v-model:value="issueTime"/>
                     </a-form-item>
                 </a-col>
                 <a-col :span="18">
@@ -67,7 +94,7 @@ const modelRef = ref({})
                     </a-form-item>
                 </a-col>
                 <a-col :span="6" style="text-align: right">
-                    <a-button type="primary">查询</a-button>
+                    <a-button type="primary" html-type="submit">查询</a-button>
                 </a-col>
 
             </a-row>
