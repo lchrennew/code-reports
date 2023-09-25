@@ -39,13 +39,17 @@ const args = computed(() => ({
     size,
 }))
 
-const selections = ref([])
+const selected = ref([])
 const expanded = ref([])
 const toggleExpanded = key =>
     expanded.value =
         expanded.value.includes(key)
             ? expanded.value.filter(value => value !== key)
             : [ ...expanded.value, key ]
+
+const onSelectionChange = keys => {
+    selected.value = [ ...keys ]
+}
 </script>
 
 <template>
@@ -53,7 +57,8 @@ const toggleExpanded = key =>
         <data-loader :load-data="getIssues" :load-data-args="args" :hash="hash" #="{loaded, data}">
             <a-table v-model:expanded-row-keys="expanded"
                      :data-source="data"
-                     :loading="!loaded" :row-selection="{selections}"
+                     :loading="!loaded"
+                     :row-selection="{selectedRowKeys: selected, onChange: onSelectionChange}"
                      row-key="key">
                 <a-table-column title="文件名" #="{record}">
                     <a href="#" @click="toggleExpanded(record.key)">{{ record.filename }}</a>

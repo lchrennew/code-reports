@@ -21,7 +21,8 @@ const code = computed(() => {
 })
 
 const highlight = rawText => rawText
-onMounted(() => el.value.querySelectorAll('span:not(.linenumber)').forEach(line => line.innerHTML = highlight(line.innerText)))
+onMounted(() => el.value.querySelectorAll('span:not(.linenumber)')
+    .forEach(line => line.innerHTML = highlight(line.innerText)))
 </script>
 
 <template>
