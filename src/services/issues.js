@@ -26,5 +26,20 @@ export const getIssues = async ({
             link: 'http://',
             level: 'high',
             rowNumber: 1,
+        },
+        {
+            committedAt: '2022-06-14 17:51:19',
+            committer: 'admin',
+            codes: '<span class="linenumber">12</span><span>import static com.tech.devps.pipoeline.infrastructure.util.Utils.*;</span>\n<span class="linenumber">13</span><span>import static com.tech.devps.pipoeline.infrastructure.util.Utils.*;</span>',
+            comment: '使用lombok自动生成',
+            filename: 'api/src/main/java/A.java',
+            issueTime: '2022-06-14 17:51:19',
+            key: 'sfasfdasd2',
+            line: 44,
+            message: '私有非静态xxxxx',
+            rule: 'PrivateMemberNoEntry',
+            link: 'http://',
+            level: 'high',
+            rowNumber: 2,
         }
     ]

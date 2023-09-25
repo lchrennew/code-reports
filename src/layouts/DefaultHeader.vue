@@ -13,7 +13,9 @@ const onChange = ({ solution, module }) => router.push({ name: '代码报告:我
     <div>
         <space-switcher container="code-report" :get-mine="getMine" consumer="admin" @change="onChange"/>
     </div>
-    <div>123</div>
+    <div>
+
+    </div>
 </template>
 
 <style scoped lang="less">

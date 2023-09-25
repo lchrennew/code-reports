@@ -1,18 +1,18 @@
 <script setup>
+import { inject } from "vue";
 
+const status = inject('status')
 </script>
 
 <template>
-    <div class="report-tools">
-        <a-space>
-            <a-button>全选</a-button>
-            <a-button>取消选择</a-button>
-            <a-button>反选</a-button>
-        </a-space>
-
-        <a-space>
+    <div class="report-tools" v-if="status!=='resolved'">
+        <a-space v-if="status==='open'">
             <a-button>忽略所选</a-button>
             <a-button>忽略全部</a-button>
+        </a-space>
+        <a-space v-else-if="status==='omitted'">
+            <a-button>取消忽略所选</a-button>
+            <a-button>取消忽略全部</a-button>
         </a-space>
     </div>
 </template>

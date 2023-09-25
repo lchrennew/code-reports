@@ -1,6 +1,6 @@
 <script setup>
 import DataLoader from "data-loader-vue3/src/DataLoader.vue";
-import { computed, inject } from "vue";
+import { computed, inject, ref } from "vue";
 import { getIssues } from "../../services/issues.js";
 import CodeScanningIssueCodeLines from "./issue/CodeScanningIssueCodeLines.vue";
 
@@ -39,14 +39,24 @@ const args = computed(() => ({
     size,
 }))
 
+const selections = ref([])
+const expanded = ref([])
+const toggleExpanded = key =>
+    expanded.value =
+        expanded.value.includes(key)
+            ? expanded.value.filter(value => value !== key)
+            : [ ...expanded.value, key ]
 </script>
 
 <template>
     <div class="report-issues">
         <data-loader :load-data="getIssues" :load-data-args="args" :hash="hash" #="{loaded, data}">
-            <a-table :loading="!loaded" :data-source="data">
+            <a-table v-model:expanded-row-keys="expanded"
+                     :data-source="data"
+                     :loading="!loaded" :row-selection="{selections}"
+                     row-key="key">
                 <a-table-column title="文件名" #="{record}">
-                    {{ record.filename }}
+                    <a href="#" @click="toggleExpanded(record.key)">{{ record.filename }}</a>
                 </a-table-column>
                 <a-table-column title="规则" #="{record}">
                     <a :href="record.link" target="_blank">
@@ -63,9 +73,10 @@ const args = computed(() => ({
                 <a-table-column title="提交时间" #="{record}">
                     {{ record.committedAt }}
                 </a-table-column>
-                <a-table-column title="操作" #="{record}">
+                <a-table-column #="{record}" title="操作" v-if="status!=='resolved'">
                     <a-space>
-                        <a href="#">忽略</a>
+                        <a href="#" v-if="status==='open'">忽略</a>
+                        <a href="#" v-else-if="status==='omitted'">取消忽略</a>
                     </a-space>
                 </a-table-column>
                 <template #expandedRowRender="{record}">

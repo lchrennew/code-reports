@@ -2,6 +2,8 @@
 
 import { computed, inject, ref, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import CodeScanningReportCommitterFilter from "./filter/CodeScanningReportCommitterFilter.vue";
+import CodeScanningReportRulesFilter from "./filter/CodeScanningReportRulesFilter.vue";
 
 
 const level = inject('level')
@@ -73,10 +75,7 @@ const onFinish = () =>
                         name="rules"
                         label="扫描规则"
                     >
-                        <a-select v-model:value="modelRef.rules">
-                            <a-select-option value="">全部</a-select-option>
-
-                        </a-select>
+                        <code-scanning-report-rules-filter v-model:value="modelRef.rules"/>
                     </a-form-item>
                 </a-col>
                 <a-col :span="6">
@@ -84,9 +83,7 @@ const onFinish = () =>
                         name="commiter"
                         label="提交人"
                     >
-                        <a-select v-model:value="modelRef.committer">
-                            <a-select-option value="">全部</a-select-option>
-                        </a-select>
+                        <code-scanning-report-committer-filter v-model:value="modelRef.committer"/>
                     </a-form-item>
                 </a-col>
                 <a-col :span="6">

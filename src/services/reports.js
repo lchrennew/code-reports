@@ -12,3 +12,13 @@ export const getReports = async ({ solution, module }) => [
         name: '扫描报告3'
     },
 ]
+
+export const getCommitters = async ({ solution, module }) => [
+    { name: 'admin' },
+    { name: 'suntianjiao' },
+]
+
+export const getRules = async ({ solution, module }) => [
+    { name: 'rule1' },
+    { name: 'rule2' },
+]
