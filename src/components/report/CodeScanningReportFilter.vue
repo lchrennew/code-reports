@@ -1,6 +1,6 @@
 <script setup>
 
-import { computed, inject, ref } from "vue";
+import { computed, inject, ref, watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 
@@ -19,6 +19,16 @@ const modelRef = ref({
     issueTimeTo: issueTimeTo.value,
     filename: filename.value,
 })
+
+watchEffect(() =>
+    modelRef.value = {
+        level: level.value,
+        rules: rules.value,
+        committer: committer.value,
+        issueTimeFrom: issueTimeFrom.value,
+        issueTimeTo: issueTimeTo.value,
+        filename: filename.value,
+    })
 
 const issueTime = computed({
     get: () => [ modelRef.value.issueTimeFrom, modelRef.value.issueTimeTo ],
